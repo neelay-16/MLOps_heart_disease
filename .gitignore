@@ -4,8 +4,15 @@
 airflow_settings.yaml
 __pycache__/
 astro
-.venv
 airflow-webserver.pid
 webserver_config.py
 airflow.cfg
 airflow.db
+MLOPS_Assignment.egg-info/
+venv/
+mlruns/
+logs/     
+tests/
+plugins/
+include/
+"include/" 
