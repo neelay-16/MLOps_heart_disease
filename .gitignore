@@ -1,21 +1,37 @@
+# ====================== DVC ======================
+# Ignore actual data (large files)
+artifacts/raw/
+artifacts/processed/
+artifacts/models/
+
+# But allow .dvc files (these must be committed to Git)
+!artifacts/*.dvc
+!artifacts/raw/*.dvc
+!artifacts/processed/*.dvc
+!artifacts/models/*.dvc
+
+# DVC internal folders
+.dvc/cache/
+.dvc/tmp/
+.dvc/plots/
+
+# ====================== General ======================
 .git
 .env
 .DS_Store
-.dvc
-.dvcignore
-artifacts
-airflow_settings.yaml
 __pycache__/
-astro
+*.pyc
+venv/
+mlruns/
+mlflow.db
+logs/
+tests/
+plugins/
+include/
+
+# Airflow
+airflow_settings.yaml
 airflow-webserver.pid
 webserver_config.py
 airflow.cfg
 airflow.db
-MLOPS_Assignment.egg-info/
-venv/
-mlruns/
-logs/     
-tests/
-plugins/
-include/
-"include/" 
