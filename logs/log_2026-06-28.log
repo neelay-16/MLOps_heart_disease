@@ -1,0 +1,104 @@
+2026-06-28 20:00:54,483-INFO-Model Training initialized. Models will be saved at: C:\Users\ramba\Desktop\MLOps Assignment\artifacts\models
+2026-06-28 20:00:54,484-INFO-Starting Heart Disease Model Training Pipeline...
+2026-06-28 20:00:54,484-INFO-Preparing data from Redis...
+2026-06-28 20:00:54,508-INFO-Total records found in Redis: 606
+2026-06-28 20:00:54,510-INFO-Extracting data from Redis
+2026-06-28 20:00:54,917-INFO-Extracting data from Redis
+2026-06-28 20:00:55,037-INFO-Data prepared successfully. Train: (244, 13), Test: (59, 13)
+2026-06-28 20:00:55,038-INFO-Training Logistic Regression...
+2026-06-28 20:00:55,068-INFO-Logistic Regression - Accuracy: 0.7458, ROC-AUC: 0.8560
+2026-06-28 20:00:55,069-INFO-Training Random Forest with Hyperparameter Tuning...
+2026-06-28 20:01:12,831-INFO-Best Random Forest Params: {'n_estimators': 300, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'sqrt', 'max_depth': None}
+2026-06-28 20:01:12,921-INFO-Random Forest - Accuracy: 0.7797, ROC-AUC: 0.8698
+2026-06-28 20:01:12,921-INFO-Training Keras Neural Network...
+2026-06-28 20:01:13,242-WARNING-TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+2026-06-28 20:01:21,506-INFO-Keras Neural Network - Accuracy: 0.7797, ROC-AUC: 0.8687
+2026-06-28 20:01:21,605-INFO-Models saved successfully: Logistic Regression, Random Forest, Keras Neural Network
+2026-06-28 20:01:21,606-INFO-=== Heart Disease Model Training Pipeline Completed Successfully ===
+2026-06-28 20:02:15,514-INFO-Model Training initialized. Models will be saved at: C:\Users\ramba\Desktop\MLOps Assignment\artifacts\models
+2026-06-28 20:02:15,514-INFO-Starting Heart Disease Model Training Pipeline...
+2026-06-28 20:02:15,514-INFO-Preparing data from Redis...
+2026-06-28 20:02:15,538-INFO-Total records found in Redis: 606
+2026-06-28 20:02:15,539-INFO-Extracting data from Redis
+2026-06-28 20:02:15,965-INFO-Extracting data from Redis
+2026-06-28 20:02:16,083-INFO-Data prepared successfully. Train: (244, 13), Test: (59, 13)
+2026-06-28 20:02:16,084-INFO-Training Logistic Regression...
+2026-06-28 20:02:16,100-INFO-Logistic Regression - Accuracy: 0.7458, ROC-AUC: 0.8560
+2026-06-28 20:02:16,100-ERROR-Error training Logistic Regression: 'HeartDiseaseModelTraining' object has no attribute 'models'
+2026-06-28 20:02:16,100-ERROR-Error in Model Training Pipeline: Error in C:\Users\ramba\Desktop\MLOps Assignment\src\model_training.py, line 120 : 'HeartDiseaseModelTraining' object has no attribute 'models'
+2026-06-28 20:07:29,657-INFO-Heart Disease Data Processing initialized...
+2026-06-28 20:07:29,657-INFO-Starting Heart Disease Data Processing Pipeline...
+2026-06-28 20:07:29,666-INFO-Data loaded successfully
+2026-06-28 20:07:29,677-INFO-Data preprocessing completed successfully
+2026-06-28 20:07:29,685-INFO-Data split completed. Train: (227, 13), Test: (76, 13)
+2026-06-28 20:07:30,025-INFO-Features stored successfully in Redis
+2026-06-28 20:07:30,025-INFO-Heart Disease Data Processing Pipeline completed successfully
+2026-06-28 20:08:26,442-INFO-Model Training initialized. Models will be saved at: C:\Users\ramba\Desktop\MLOps Assignment\artifacts\models
+2026-06-28 20:08:26,443-INFO-Starting Heart Disease Model Training Pipeline...
+2026-06-28 20:08:26,443-INFO-Preparing data from Redis...
+2026-06-28 20:08:26,467-INFO-Total records found in Redis: 606
+2026-06-28 20:08:26,469-INFO-Extracting data from Redis
+2026-06-28 20:08:26,924-INFO-Extracting data from Redis
+2026-06-28 20:08:27,038-INFO-Data prepared successfully. Train: (244, 13), Test: (59, 13)
+2026-06-28 20:08:27,039-INFO-Training Logistic Regression...
+2026-06-28 20:08:27,079-INFO-Logistic Regression - Accuracy: 0.7458, ROC-AUC: 0.8560
+2026-06-28 20:08:27,079-INFO-Training Random Forest with Hyperparameter Tuning...
+2026-06-28 20:08:44,469-INFO-Best Random Forest Params: {'n_estimators': 300, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'sqrt', 'max_depth': None}
+2026-06-28 20:08:44,557-INFO-Random Forest - Accuracy: 0.7797, ROC-AUC: 0.8698
+2026-06-28 20:08:44,557-INFO-Training Keras Neural Network...
+2026-06-28 20:08:44,800-WARNING-TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+2026-06-28 20:08:51,971-INFO-Keras Neural Network - Accuracy: 0.7797, ROC-AUC: 0.8318
+2026-06-28 20:08:52,062-INFO-Models saved successfully: Logistic Regression, Random Forest, Keras Neural Network
+2026-06-28 20:08:52,062-INFO-=== Heart Disease Model Training Pipeline Completed Successfully ===
+2026-06-28 20:12:05,435-INFO-Heart Disease Data Processing initialized...
+2026-06-28 20:12:05,436-INFO-Starting Heart Disease Data Processing Pipeline...
+2026-06-28 20:12:05,450-INFO-Data loaded successfully
+2026-06-28 20:12:05,464-INFO-Data preprocessing completed successfully
+2026-06-28 20:12:05,473-INFO-Data split completed. Train: (227, 13), Test: (76, 13)
+2026-06-28 20:12:05,816-INFO-Features stored successfully in Redis
+2026-06-28 20:12:05,817-INFO-Heart Disease Data Processing Pipeline completed successfully
+2026-06-28 20:12:47,182-INFO-Model Training initialized. Models will be saved at: C:\Users\ramba\Desktop\MLOps Assignment\artifacts\models
+2026-06-28 20:12:47,183-INFO-Starting Heart Disease Model Training Pipeline...
+2026-06-28 20:12:47,183-INFO-Preparing data from Redis...
+2026-06-28 20:12:47,199-INFO-Total records found in Redis: 606
+2026-06-28 20:12:47,201-INFO-Extracting data from Redis
+2026-06-28 20:12:47,599-INFO-Extracting data from Redis
+2026-06-28 20:12:47,711-INFO-Data prepared successfully. Train: (237, 13), Test: (66, 13)
+2026-06-28 20:12:47,711-INFO-Training Logistic Regression...
+2026-06-28 20:12:47,735-INFO-Logistic Regression - Accuracy: 0.8182, ROC-AUC: 0.8714
+2026-06-28 20:12:47,735-INFO-Training Random Forest with Hyperparameter Tuning...
+2026-06-28 20:13:04,901-INFO-Best Random Forest Params: {'n_estimators': 300, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'sqrt', 'max_depth': None}
+2026-06-28 20:13:04,989-INFO-Random Forest - Accuracy: 0.8182, ROC-AUC: 0.8714
+2026-06-28 20:13:04,989-INFO-Training Keras Neural Network...
+2026-06-28 20:13:05,238-WARNING-TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+2026-06-28 20:13:14,347-INFO-Keras Neural Network - Accuracy: 0.8333, ROC-AUC: 0.8723
+2026-06-28 20:13:14,426-INFO-Models saved successfully: Logistic Regression, Random Forest, Keras Neural Network
+2026-06-28 20:13:14,426-INFO-=== Heart Disease Model Training Pipeline Completed Successfully ===
+2026-06-28 20:15:53,975-INFO-Model Training initialized. Models will be saved at: C:\Users\ramba\Desktop\MLOps Assignment\artifacts\models
+2026-06-28 20:15:53,975-INFO-Starting Heart Disease Model Training Pipeline...
+2026-06-28 20:15:53,976-INFO-Preparing data from Redis...
+2026-06-28 20:15:53,994-INFO-Total records found in Redis: 606
+2026-06-28 20:15:53,995-INFO-Extracting data from Redis
+2026-06-28 20:15:54,380-INFO-Extracting data from Redis
+2026-06-28 20:15:54,484-INFO-Data prepared successfully. Train: (237, 13), Test: (66, 13)
+2026-06-28 20:15:54,484-INFO-Training Logistic Regression...
+2026-06-28 20:15:54,500-INFO-Logistic Regression - Accuracy: 0.8182, ROC-AUC: 0.8714
+2026-06-28 20:15:54,500-ERROR-Error training Logistic Regression: 'NoneType' object does not support item assignment
+2026-06-28 20:15:54,500-ERROR-Error in Model Training Pipeline: Error in C:\Users\ramba\Desktop\MLOps Assignment\src\model_training.py, line 120 : 'NoneType' object does not support item assignment
+2026-06-28 20:19:09,366-INFO-Heart Disease Model Training initialized...
+2026-06-28 20:19:09,367-INFO-Starting Heart Disease Model Training Pipeline...
+2026-06-28 20:19:09,367-INFO-Preparing data from Redis...
+2026-06-28 20:19:09,383-INFO-Total records found in Redis: 606
+2026-06-28 20:19:09,384-INFO-Extracting data from Redis
+2026-06-28 20:19:09,812-INFO-Extracting data from Redis
+2026-06-28 20:19:09,933-INFO-Data prepared successfully. Train: (237, 13), Test: (66, 13)
+2026-06-28 20:19:09,933-INFO-Training Logistic Regression...
+2026-06-28 20:19:09,949-INFO-Logistic Regression - Accuracy: 0.8182, ROC-AUC: 0.8714
+2026-06-28 20:19:09,949-INFO-Training Random Forest with Hyperparameter Tuning...
+2026-06-28 20:19:26,752-INFO-Best Random Forest Params: {'n_estimators': 300, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'sqrt', 'max_depth': None}
+2026-06-28 20:19:26,874-INFO-Random Forest - Accuracy: 0.8182, ROC-AUC: 0.8714
+2026-06-28 20:19:26,875-INFO-Training Keras Neural Network...
+2026-06-28 20:19:27,012-WARNING-TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+2026-06-28 20:19:34,379-INFO-Keras Neural Network - Accuracy: 0.8182, ROC-AUC: 0.8677
+2026-06-28 20:19:34,449-INFO-Models saved successfully: Logistic Regression, Random Forest, Keras Neural Network
+2026-06-28 20:19:34,449-INFO-=== Heart Disease Model Training Pipeline Completed Successfully ===

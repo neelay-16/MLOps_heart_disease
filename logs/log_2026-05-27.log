@@ -1,0 +1,15 @@
+2026-05-27 11:51:31,720-INFO-Data Ingestion Pipeline started
+2026-05-27 11:51:33,803-INFO-Database connection established....
+2026-05-27 11:51:33,828-ERROR-Error while extracting data relation "public.titanic" does not exist
+LINE 1: SELECT * FROM public.titanic
+                      ^
+
+2026-05-27 11:51:33,828-ERROR-Error while running data ingestion pipeline Error in C:\Users\ramba\Desktop\MLOps Assignment\src\data_ingestion.py, line 41 : relation "public.titanic" does not exist
+LINE 1: SELECT * FROM public.titanic
+                      ^
+
+2026-05-27 11:52:17,800-INFO-Data Ingestion Pipeline started
+2026-05-27 11:52:19,852-INFO-Database connection established....
+2026-05-27 11:52:19,870-INFO-Data extracted from the database
+2026-05-27 11:52:19,889-INFO-Data splitted and saved successfully
+2026-05-27 11:52:19,889-INFO-End of Data Ingestion pipeline
