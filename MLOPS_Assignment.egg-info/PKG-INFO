@@ -16,5 +16,10 @@ Requires-Dist: lime
 Requires-Dist: imbalanced-learn
 Requires-Dist: mlflow
 Requires-Dist: dvc
+Requires-Dist: dvc-gs
+Requires-Dist: fastapi
+Requires-Dist: uvicorn[standard]
+Requires-Dist: pydantic
+Requires-Dist: python-dotenv
 Dynamic: author
 Dynamic: requires-dist

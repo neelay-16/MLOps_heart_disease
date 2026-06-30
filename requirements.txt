@@ -6,9 +6,14 @@ setuptools
 psycopg2-binary==2.9.12            #connect python to postgreSQL
 scikit-learn
 redis
-tensorflow
+tensorflow-cpu
 shap
 lime
 imbalanced-learn
 mlflow
 dvc
+dvc-gs
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv

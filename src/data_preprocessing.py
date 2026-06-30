@@ -108,6 +108,17 @@ class HeartDiseaseDataProcessing:
             self.preprocess_data()
             self.split_data()
             self.store_feature_in_redis()
+
+            # ====================== NEW: Save processed data ======================
+            os.makedirs("artifacts/processed", exist_ok=True)
+
+            self.X_train.to_csv("artifacts/processed/X_train.csv", index=False)
+            self.X_test.to_csv("artifacts/processed/X_test.csv", index=False)
+            self.y_train.to_csv("artifacts/processed/y_train.csv", index=False)
+            self.y_test.to_csv("artifacts/processed/y_test.csv", index=False)
+
+            logger.info("Processed data also saved in artifacts/processed/")
+
             logger.info("Heart Disease Data Processing Pipeline completed successfully")
         except Exception as e:
             raise CustomException("Failed to run Heart Disease data processing pipeline", sys.exc_info())

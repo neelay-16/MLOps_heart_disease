@@ -12,3 +12,8 @@ lime
 imbalanced-learn
 mlflow
 dvc
+dvc-gs
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
