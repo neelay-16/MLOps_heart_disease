@@ -5,9 +5,8 @@ pipeline {
         VENV_DIR = 'venv'
         GCP_PROJECT = "infra-window-453718-m0"
         IMAGE_NAME = "gcr.io/${GCP_PROJECT}/mlops-project1"
-        CLUSTER_NAME = "autopilot-cluster-1"           // ← Change this to your GKE cluster name
-        ZONE = "us-central1-a"                   // ← Change this to your cluster zone/region
-        NAMESPACE = "default"
+        CLUSTER_NAME = "mlops-cluster"           // ← Update this
+        ZONE = "us-central1-a"                   // ← Update this
     }
 
     options {
@@ -38,10 +37,10 @@ pipeline {
 
         stage('Build & Push Docker Image to GCR') {
             steps {
-                withCredentials([file(credentialsId: 'gcp_key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                withCredentials([file(credentialsId: 'gcp_key', variable: 'GCP_KEY_FILE')]) {
                     echo '🐳 Building and Pushing Docker Image to GCR...'
                     sh '''
-                        gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
+                        gcloud auth activate-service-account --key-file="${GCP_KEY_FILE}"
                         gcloud config set project ${GCP_PROJECT}
                         gcloud auth configure-docker --quiet
 
@@ -54,27 +53,21 @@ pipeline {
 
         stage('Deploy to GKE') {
             steps {
-                withCredentials([file(credentialsId: 'gcp_key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
-                    echo '🚀 Deploying to Google Kubernetes Engine (GKE)...'
+                withCredentials([file(credentialsId: 'gcp_key', variable: 'GCP_KEY_FILE')]) {
+                    echo '🚀 Deploying to GKE...'
                     sh '''
-                        # Authenticate with GCP
-                        gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
+                        gcloud auth activate-service-account --key-file="${GCP_KEY_FILE}"
                         gcloud config set project ${GCP_PROJECT}
 
-                        # Get GKE cluster credentials
                         gcloud container clusters get-credentials ${CLUSTER_NAME} --zone ${ZONE}
 
-                        # Apply Kubernetes manifests
-                        kubectl apply -f k8s/deployment.yaml -n ${NAMESPACE}
-                        kubectl apply -f k8s/service.yaml -n ${NAMESPACE}
+                        kubectl apply -f k8s/deployment.yaml
+                        kubectl apply -f k8s/service.yaml
 
-                        # Update image in deployment
                         kubectl set image deployment/mlops-project1 \
-                            mlops-project1=${IMAGE_NAME}:latest \
-                            -n ${NAMESPACE}
+                            mlops-project1=${IMAGE_NAME}:latest
 
-                        # Check rollout status
-                        kubectl rollout status deployment/mlops-project1 -n ${NAMESPACE}
+                        kubectl rollout status deployment/mlops-project1
                     '''
                 }
             }
@@ -83,13 +76,12 @@ pipeline {
 
     post {
         success {
-            echo '✅ Deployment to GKE completed successfully!'
+            echo '✅ Pipeline completed successfully!'
         }
         failure {
-            echo '❌ Pipeline failed. Please check the logs above.'
+            echo '❌ Pipeline failed. Check the logs above.'
         }
         always {
-            echo '🧹 Cleaning up virtual environment...'
             sh 'rm -rf ${VENV_DIR}'
         }
     }
