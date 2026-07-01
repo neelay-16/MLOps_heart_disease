@@ -36,20 +36,24 @@ pipeline {
         }
 
         stage('Build & Push Docker Image to GCR') {
-            steps {
-                withCredentials([file(credentialsId: 'gcp_key', variable: 'GCP_KEY_FILE')]) {
-                    echo '🐳 Building and Pushing Docker Image to GCR...'
-                    sh '''
-                        gcloud auth activate-service-account --key-file="${GCP_KEY_FILE}"
-                        gcloud config set project ${GCP_PROJECT}
-                        gcloud auth configure-docker --quiet
+    steps {
+        withCredentials([file(credentialsId: 'gcp_key', variable: 'GCP_KEY_FILE')]) {
+            echo '🐳 Building and Pushing Docker Image to GCR...'
+            sh '''
+                gcloud auth activate-service-account --key-file="${GCP_KEY_FILE}"
+                gcloud config set project ${GCP_PROJECT}
+                gcloud auth configure-docker --quiet
 
-                        docker build -t ${IMAGE_NAME}:latest .
-                        docker push ${IMAGE_NAME}:latest
-                    '''
+                # Force newer TLS version
+                export DOCKER_API_VERSION=1.41
+                export DOCKER_TLS_MIN_VERSION=1.2
+
+                docker build -t ${IMAGE_NAME}:latest .
+                docker push ${IMAGE_NAME}:latest
+            '''
                 }
             }
-        }
+    }
 
         stage('Deploy to GKE') {
             steps {
