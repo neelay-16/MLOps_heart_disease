@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mlops-project1
+  namespace: default
 spec:
   replicas: 2
   selector:
@@ -17,6 +18,8 @@ spec:
         image: gcr.io/infra-window-453718-m0/mlops-project1:latest
         ports:
         - containerPort: 8000
+        command: ["uvicorn"]                    # ← Add this
+        args: ["api.main:app", "--host", "0.0.0.0", "--port", "8000"]   # ← Add this
         resources:
           requests:
             memory: "512Mi"
