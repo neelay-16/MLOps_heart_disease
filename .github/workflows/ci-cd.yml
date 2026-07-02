@@ -46,7 +46,7 @@ jobs:
       - name: Apply Kubernetes Manifests
         run: |
           echo "Applying latest application manifests..."
-          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/deployment.yaml --server-side --force-conflicts
           kubectl apply -f k8s/service.yaml
 
           echo "Restarting deployment..."
