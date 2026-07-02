@@ -50,7 +50,7 @@ jobs:
       - name: Get GKE Credentials
         uses: google-github-actions/get-gke-credentials@v2
         with:
-          cluster_name: mlops-standard-cluster
+          cluster_name: mlops-standard-cluster1
           location: us-central1-a
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
