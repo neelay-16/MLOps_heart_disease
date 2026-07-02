@@ -20,8 +20,8 @@ spec:
         - containerPort: 8000
         env:
         - name: REDIS_HOST
-          value: "redis"           # ← This matches the Redis service name
-        - name: REDIS_PORT
+          value: "redis"
+        - name: REDIS_PORT_NUMBER
           value: "6379"
         resources:
           requests:
@@ -29,4 +29,5 @@ spec:
             cpu: "500m"
           limits:
             memory: "1Gi"
-            cpu: "500m"
+            cpu: "1000m"
+        imagePullPolicy: Always
