@@ -37,9 +37,14 @@ jobs:
 
       # ====================== ONLY APPLICATION (NOT REDIS) ======================
       - name: Deploy Application to GKE
-        run: |
-          gcloud container clusters get-credentials mlops-standard-cluster --zone us-central1-a --project ${{ secrets.GCP_PROJECT_ID }}
+        uses: google-github-actions/get-gke-credentials@v2
+        with:
+          cluster_name: mlops-standard-cluster
+          location: us-central1-a
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
 
+      - name: Apply Kubernetes Manifests
+        run: |
           echo "Applying latest application manifests..."
           kubectl apply -f k8s/deployment.yaml
           kubectl apply -f k8s/service.yaml
