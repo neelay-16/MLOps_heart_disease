@@ -16,6 +16,9 @@ spec:
       containers:
       - name: redis
         image: redis:7-alpine
+        # Highlight-start: Add arguments to save data to disk
+        args: ["redis-server", "--appendonly", "yes"]
+        # Highlight-end
         ports:
         - containerPort: 6379
         resources:
