@@ -7,6 +7,8 @@ from typing import Optional, Dict, Any
 import uvicorn
 import sys
 import os
+import json
+import psycopg2
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -52,18 +54,53 @@ async def startup_event():
 # ====================== Mock Database Logging Function ======================
 def log_prediction_to_db(patient_id: Optional[str], features: dict, prediction: int, probability: float, model_version: str = "v1"):
     """
-    Logs prediction results and metrics into the analytical tracking database.
-    Replace this print statement with your actual PostgreSQL connection / insert logic.
+    Logs production prediction results and client metrics directly into PostgreSQL.
     """
+    connection = None
+    cursor = None
     try:
-        print("\n📝 [DB LOGGING] Saving record to PostgreSQL...")
-        print(f"   Patient ID:    {patient_id}")
-        print(f"   Prediction:    {prediction}")
-        print(f"   Probability:   {probability}")
-        print(f"   Model Version: {model_version}")
-        print(f"   Features Count: {len(features) if features else 0}")
+        # Fetch configurations from environmental injections
+        db_host = os.getenv("POSTGRES_HOST", "localhost")
+        db_port = os.getenv("POSTGRES_PORT", "5432")
+        db_name = os.getenv("POSTGRES_DB", "heart_disease_db")
+        db_user = os.getenv("POSTGRES_USER", "postgres")
+        db_password = os.getenv("POSTGRES_PASSWORD", "password")
+
+        # Establish connection matrix
+        connection = psycopg2.connect(
+            host=db_host,
+            port=db_port,
+            database=db_name,
+            user=db_user,
+            password=db_password,
+            connect_timeout=5  # Fail fast if connection hangs
+        )
+        cursor = connection.cursor()
+
+        # Insert metadata registry using parametrized bindings to prevent SQL injections
+        insert_query = """
+        INSERT INTO prediction_logs (patient_id, prediction, probability, model_version, features)
+        VALUES (%s, %s, %s, %s, %s);
+        """
+        
+        # Serialize raw features dict cleanly to a JSON string for the JSONB column
+        features_json = json.dumps(features) if features else json.dumps({})
+        
+        cursor.execute(insert_query, (patient_id, prediction, probability, model_version, features_json))
+        connection.commit()
+        print("📝 [DB LOGGING] Successfully logged inference metric entry to PostgreSQL!")
+
     except Exception as db_err:
-        print(f"⚠️ Failed to log prediction metrics to tracking database: {db_err}")
+        print(f"⚠️ Database tracking registry failed to write: {db_err}")
+        if connection:
+            connection.rollback()
+            
+    finally:
+        # Prevent database connection pool starvation by cleanly closing resources
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
 
 
 # ====================== Request Model ======================
