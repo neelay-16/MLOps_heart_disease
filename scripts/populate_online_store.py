@@ -5,10 +5,7 @@ import json
 import os
 from dotenv import load_dotenv
 
-# Load environment variables (for local testing)
-if os.getenv("KUBERNETES_SERVICE_HOST") is None:
-    load_dotenv()
-
+# ====================== READ FROM ENVIRONMENT VARIABLES ======================
 redis_host = os.getenv("REDIS_HOST", "localhost")
 redis_port = int(os.getenv("REDIS_PORT_NUMBER", 6379))
 
@@ -37,9 +34,8 @@ if os.path.exists(train_path):
 else:
     print("Processed CSV not found. Downloading original UCI Heart Disease data...")
     url = "https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data"
-    columns = ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 
+    columns = ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg',
                'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal', 'target']
-    
     df = pd.read_csv(url, header=None, names=columns)
     df = df.replace('?', np.nan).apply(pd.to_numeric, errors='coerce')
     df['ca'] = df['ca'].fillna(df['ca'].median())
@@ -49,21 +45,18 @@ else:
 
 # ====================== POPULATE REDIS ======================
 print("Populating Redis with patient data...")
-
 count = 0
+
 for idx, row in df.iterrows():
-    # Prepare features (exclude target columns)
     features = {}
     for col in df.columns:
         if col not in ['target', 'target_binary']:
             val = row[col]
             features[col] = float(val) if pd.notna(val) else 0.0
-    
-    # Add target info
+
     features['target'] = int(row.get('target', 0))
     features['target_binary'] = int(row.get('target_binary', 0))
-    
-    # Store with correct key format (matches OnlineFeatureStore)
+
     key = f"patient:{idx}:features"
     client.set(key, json.dumps(features))
     count += 1

@@ -7,6 +7,7 @@ from typing import Optional, Dict, Any
 import uvicorn
 import sys
 import os
+from src.prediction_logger import log_prediction
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -89,6 +90,24 @@ def predict(request: PredictionRequest):
         
         else:
             raise HTTPException(status_code=400, detail="Please provide either 'patient_id' or 'features'")
+        
+        # ====================== LOG PREDICTION ======================
+        if request.patient_id:
+            features = online_store.get_patient_features(request.patient_id)
+            log_prediction(
+                patient_id=request.patient_id,
+                features=features,
+                prediction=result["final_prediction"],
+                probability=result["avg_probability"]
+            )
+        elif request.features:
+            log_prediction(
+                patient_id=None,
+                features=request.features,
+                prediction=result["final_prediction"],
+                probability=result["avg_probability"]
+            )
+        # ============================================================
 
         return result
 

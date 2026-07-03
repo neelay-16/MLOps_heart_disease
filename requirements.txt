@@ -18,3 +18,5 @@ python-dotenv
 joblib>=1.4.0
 numpy>=1.26.0
 pandas>=2.2.0
+evidently>=0.4.0
+prometheus-client>=0.20.0
