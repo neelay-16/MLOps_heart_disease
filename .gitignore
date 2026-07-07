@@ -28,10 +28,22 @@ logs/
 tests/
 plugins/
 include/
+custom_jenkins/
+verify_redis.py
+verify_prediction.py
+simulate_drift.py
+payload.json
+populate_online_feature_store
+Jenkinsfile
+get_num_cat.py
+auto_label_feedback.py
+actually_exist.py
+scripts/
+
 
 # Airflow
 airflow_settings.yaml
 airflow-webserver.pid
 webserver_config.py
 airflow.cfg
-airflow.db
+airflow.db"keys/" 
