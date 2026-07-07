@@ -1,0 +1,6 @@
+services:
+  scheduler:
+    volumes:
+      - ./keys/gcp-service-account.json:/usr/local/airflow/keys/gcp-service-account.json:ro
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/usr/local/airflow/keys/gcp-service-account.json
